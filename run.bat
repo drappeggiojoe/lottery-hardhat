@@ -16,18 +16,6 @@ echo   LOTTERY - Automazione Completa
 echo  ==========================================
 echo.
 
-:: ── 0. Controlla prerequisiti ────────────────────────────────
-echo  [0/5] Controllo prerequisiti...
-where node >nul 2>&1
-if %errorlevel% neq 0 (
-    echo  [ERRORE] Node.js non e' installato!
-    echo  Scaricalo da: https://nodejs.org ^(versione LTS^)
-    echo.
-    pause & exit /b 1
-)
-echo  [OK] Node.js trovato.
-echo.
-
 :: ── 1. Installa dipendenze ──────────────────────────────────
 echo  [1/5] Installazione dipendenze npm...
 call npm install --ignore-scripts 2>nul
