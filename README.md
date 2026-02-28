@@ -1,6 +1,6 @@
 # 🎰 Lottery Hardhat + Viem
 
-Progetto Hardhat per il contratto `LotteryWithTickets.sol`, con script di deploy, interazione e test scritti usando **Viem**.
+Progetto Hardhat per il contratto `LotteryWithTickets.sol`, con script di deploy, interazione, test e automazione scritti usando **Viem**.
 
 ---
 
@@ -9,14 +9,15 @@ Progetto Hardhat per il contratto `LotteryWithTickets.sol`, con script di deploy
 ```
 lottery-hardhat/
 ├── contracts/
-│   └── LotteryWithTickets.sol     # Il contratto
+│   └── LotteryWithTickets.sol      # Il contratto
 ├── scripts/
-│   ├── deploy.js                  # Script di deploy
-│   └── interact.js                # Script di interazione completa
+│   ├── deploy.js                   # Script di deploy
+│   └── interact.js                 # Script di interazione completa
 ├── test/
-│   └── LotteryWithTickets.test.js # Test con Viem + Chai
+│   └── LotteryWithTickets.test.js  # 19 test con Viem + Chai
 ├── hardhat.config.js
-└── package.json
+├── package.json
+└── run.bat                         # Automazione completa con un click (Windows)
 ```
 
 ---
@@ -29,7 +30,24 @@ npm install
 
 ---
 
-## 🛠️ Comandi
+## 🚀 Avvio rapido (Windows)
+
+Il modo più semplice per eseguire tutto è fare **doppio click** su `run.bat`.
+
+Lo script esegue automaticamente in sequenza:
+
+1. `npm install` — installa le dipendenze
+2. `npx hardhat compile` — compila il contratto
+3. `npx hardhat test` — esegue tutti i test
+4. Avvia il nodo Hardhat locale in una finestra separata
+5. Deploy del contratto e salvataggio automatico dell'indirizzo
+6. Esegue lo script di interazione completa
+
+> ⚠️ Su Windows è normale vedere `Assertion failed: UV_HANDLE_CLOSING` — è un bug noto di Node.js/Windows che non influenza i risultati.
+
+---
+
+## 🛠️ Comandi manuali
 
 ### Compilare il contratto
 ```bash
@@ -42,6 +60,7 @@ npm test
 ```
 
 ### Verificare la coverage
+
 ```bash
 # Windows CMD
 set SOLIDITY_COVERAGE=true && npx hardhat coverage
@@ -55,7 +74,9 @@ SOLIDITY_COVERAGE=true npx hardhat coverage
 
 ---
 
-## 🚀 Deploy e interazione in locale
+## 🔧 Deploy e interazione manuale
+
+Se preferisci eseguire i passi uno alla volta:
 
 ### 1 — Avvia il nodo Hardhat locale (Terminale 1)
 ```bash
@@ -67,18 +88,14 @@ Lascia questo terminale aperto per tutta la sessione.
 ```bash
 npm run deploy:local
 ```
-Copia l'indirizzo del contratto stampato in output, ad esempio:
-```
-✅ LotteryWithTickets deployato all'indirizzo: 0x5fbdb2315678afecb367f032d93f642f64180aa3
-```
 
 ### 3 — Configura lo script di interazione
 Apri `scripts/interact.js` e incolla l'indirizzo nella variabile:
 ```js
-const CONTRACT_ADDRESS = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
+const CONTRACT_ADDRESS = "0x...indirizzo_dal_deploy";
 ```
 
-### 4 — Esegui lo script di interazione (Terminale 2)
+### 4 — Esegui lo script di interazione
 ```bash
 npm run interact
 ```
