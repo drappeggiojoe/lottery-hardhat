@@ -1,0 +1,21 @@
+{
+  "name": "lottery-hardhat",
+  "version": "1.0.0",
+  "description": "Lottery smart contract with Hardhat + Viem",
+  "scripts": {
+    "coverage": "cross-env SOLIDITY_COVERAGE=true hardhat coverage",
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "node": "hardhat node",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "interact": "hardhat run scripts/interact.js --network localhost"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
+    "cross-env": "^10.1.0",
+    "hardhat": "^2.22.0"
+  },
+  "dependencies": {
+    "viem": "^2.0.0"
+  }
+}
