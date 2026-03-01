@@ -20,7 +20,7 @@ echo.
 
 :: ── 2. Compila il contratto
 echo  [2/5] Compilazione contratto Solidity...
-call npx hardhat compile > compile_output.tmp 2>&1
+call npm run compile > compile_output.tmp 2>&1
 type compile_output.tmp
 findstr /i "SyntaxError CompileError ParseError HardhatError" compile_output.tmp >nul 2>&1
 if %errorlevel% equ 0 (
@@ -34,8 +34,7 @@ echo.
 
 :: ── 3. Esegui test + coverage
 echo  [3/5] Esecuzione test e coverage...
-set SOLIDITY_COVERAGE=true
-call npx hardhat coverage > test_output.tmp 2>&1
+call npm run coverage > test_output.tmp 2>&1
 type test_output.tmp
 findstr /i "failing" test_output.tmp >nul 2>&1
 if %errorlevel% equ 0 (
@@ -49,7 +48,7 @@ echo.
 
 :: ── 4. Avvia il nodo in background
 echo  [4/5] Avvio nodo Hardhat locale...
-start "Hardhat Node" cmd /k "npx hardhat node"
+start "Hardhat Node" cmd /k "npm run node"
 echo  Attendo che il nodo sia pronto...
 set /a attempts=0
 :WAIT_NODE
@@ -67,7 +66,7 @@ echo.
 
 :: ── 5. Deploy
 echo  [5/5] Deploy del contratto...
-call npx hardhat run scripts/deploy.js --network localhost > deploy_output.tmp 2>&1
+call npm run deploy:local > deploy_output.tmp 2>&1
 type deploy_output.tmp
 echo.
 findstr /i "HardhatError Error:" deploy_output.tmp | findstr /v /i "UV_HANDLE_CLOSING Assertion failed" >nul 2>&1
@@ -93,7 +92,7 @@ echo.
 echo  Avvio script di interazione...
 echo  ==========================================
 echo.
-call npx hardhat run scripts/interact.js --network localhost > interact_output.tmp 2>&1
+call npm run interact > interact_output.tmp 2>&1
 type interact_output.tmp
 echo.
 findstr /i "HardhatError Error:" interact_output.tmp | findstr /v /i "UV_HANDLE_CLOSING Assertion failed" >nul 2>&1
